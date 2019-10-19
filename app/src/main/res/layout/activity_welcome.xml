@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.Welcome">
+
+    <TextView
+        android:id="@+id/main_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300px"
+        android:text="Akshat Singhal"
+        android:textAlignment="center"
+        android:textColor="#283799"
+        android:textSize="120px"
+        />
+
+    <TextView
+        android:id="@+id/reg_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="16BCE0901"
+        android:textAlignment="center"
+        android:textColor="#283799"
+        android:textSize="100px"
+        />
+
+    <TextView
+        android:id="@+id/da1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Digital Assignment 1"
+        android:textAlignment="center"
+        android:textColor="#283799"
+        android:textSize="80px"
+
+        />
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="265dp"
+        android:layout_height="260dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="180px"
+        android:src="@mipmap/profile_round"
+
+        />
+
+</LinearLayout>

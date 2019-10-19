@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/fragment1"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Messenger" />
+        <item
+            android:id="@+id/fragment2"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Add New User" />
+        <item
+            android:id="@+id/fragment3"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Your Profile" />
+        <item
+            android:id="@+id/fragment4"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Credentials" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <group android:checkableBehavior="single">
+            <item
+                android:id="@+id/ques1"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Question 1" />
+            <item
+                android:id="@+id/ques2"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Question 2" />
+            <item
+                android:id="@+id/ques3"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Question 3" />
+            <item
+                android:id="@+id/ques4"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Question 4" />
+            </group>
+        </menu>
+    </item>
+
+</menu>
