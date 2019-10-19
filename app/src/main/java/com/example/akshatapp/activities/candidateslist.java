@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +28,8 @@ import com.example.akshatapp.listeners.OnSwipeTouchListener;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static android.content.Intent.ACTION_VIEW;
 
@@ -93,18 +96,12 @@ class myAdapter extends ArrayAdapter<String>
 
 
 public class candidateslist extends AppCompatActivity {
-//    final String[] names = {"Akshat","Himal","Raj","Rithwik"};
-//    final String[] nicknames = {"akkidarapstar","himal_singhh","____raaaj____","rithwikawasthi"};
-//    int[] imgid = {R.drawable.ic_sentiment_neutral_black_24dp,R.drawable.ic_sentiment_satisfied_black_24dp,R.drawable.ic_sentiment_very_dissatisfied_black_24dp,R.drawable.ic_sentiment_very_satisfied_black_24dp};
-
-    private int REL_SWIPE_MIN_DISTANCE;
-    private int REL_SWIPE_MAX_OFF_PATH;
-    private int REL_SWIPE_THRESHOLD_VELOCITY;
 
     ArrayList<String> names = new ArrayList<String>();
     ArrayList<String> nicknames = new ArrayList<String>();
     ArrayList<String> fbnames = new ArrayList<String>();
     ArrayList<Integer> imgid = new ArrayList<Integer>();
+    ArrayList<Integer> ide = new ArrayList<Integer>();
     ListView lv;
     Button insert;
     SQLiteDatabase db = null;
@@ -149,13 +146,15 @@ public class candidateslist extends AppCompatActivity {
         names.add("Akshat Singhal");
         nicknames.add("akkidarapstar");
         fbnames.add("akkidarapstar");
+        ide.add(1);
         imgid.add(R.drawable.ic_sentiment_very_satisfied_black_24dp);
         db = this.openOrCreateDatabase("instagram",MODE_PRIVATE,null);
         File database = getApplicationContext().getDatabasePath("instagram");
         if(database.exists())
         {
+            Log.e("DATABASE","Connection Successful");
             //db.execSQL("DROP table users");
-            Toast.makeText(this, "Database is created", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Database is created", Toast.LENGTH_SHORT).show();
         }
 
         myAdapter adapter = new myAdapter(this,names,nicknames,fbnames,imgid);
@@ -173,10 +172,13 @@ public class candidateslist extends AppCompatActivity {
                 Toast.makeText(candidateslist.this, "top", Toast.LENGTH_SHORT).show();
             }
             public void onSwipeRight(int posx,int posy) {
-                Toast.makeText(candidateslist.this, "left to right "+posx+ " "+posy, Toast.LENGTH_SHORT).show();
+                int position = lv.pointToPosition(posx,posy);
+                Toast.makeText(candidateslist.this, "left to right "+position, Toast.LENGTH_LONG).show();
+                deleteUser(position);
             }
             public void onSwipeLeft(int posx,int posy) {
-                Toast.makeText(candidateslist.this, "right to left "+posx+ " "+posy, Toast.LENGTH_SHORT).show();
+                int position = lv.pointToPosition(posx,posy);
+                Toast.makeText(candidateslist.this, "right to left "+position, Toast.LENGTH_LONG).show();
             }
             public void onSwipeBottom() {
                 Toast.makeText(candidateslist.this, "bottom", Toast.LENGTH_SHORT).show();
@@ -221,8 +223,27 @@ public class candidateslist extends AppCompatActivity {
         }
     }
 
-    public void deleteUser()
+    public void deleteUser(int pos)
     {
+        int id = ide.get(pos);
+        String sql = "DELETE from `users` where `id`="+id;
+        try {
+            db.execSQL(sql);
+            Toast.makeText(this, "Deleted bhaisahab - "+id, Toast.LENGTH_LONG).show();
+
+            Timer t = new Timer();
+            t.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    finish();
+                    startActivity(getIntent());
+                }
+            },3000);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
     }
 
@@ -238,11 +259,13 @@ public class candidateslist extends AppCompatActivity {
         int imgidf= cursor.getColumnIndex("profileimg");
         if((cursor!=null) && (cursor.getCount()>0))
         {
+            ide.clear();
             names.clear();
             nicknames.clear();
             imgid.clear();
             fbnames.clear();
             do {
+                ide.add(cursor.getInt(idcolumn));
                 names.add(cursor.getString(namecolumn));
                 nicknames.add(cursor.getString(instanamecolumn));
                 imgid.add(cursor.getInt(imgidf));

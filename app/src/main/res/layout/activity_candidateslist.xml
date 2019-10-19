@@ -21,6 +21,14 @@
             android:layout_height="64dp"
             app:srcCompat="@mipmap/insta" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="**  Swipe right to delete  **"
+            android:textColor="#ff0000"
+            android:textAlignment="center"
+            />
+
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
