@@ -7,6 +7,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -18,10 +21,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.akshatapp.R;
+import com.example.akshatapp.activities.NewRecord;
+import com.example.akshatapp.activities.testdrawer;
 import com.example.akshatapp.listeners.OnSwipeTouchListener;
 
 import java.io.File;
@@ -29,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
 import static android.content.Intent.ACTION_VIEW;
 
@@ -110,6 +117,7 @@ public class candidateslistfragment extends Fragment {
     private String mParam2;
 
     public candidateslistfragment() {
+        setHasOptionsMenu(true);
         // Required empty public constructor
     }
 
@@ -138,6 +146,36 @@ public class candidateslistfragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.navmenu, menu);
+        super.onCreateOptionsMenu(menu,menuInflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId())
+        {
+            case R.id.item1:
+                Intent it = new Intent(getActivity(), NewRecord.class);
+                startActivityForResult(it,1);
+                return true;
+            case R.id.item2:
+                Toast.makeText(getActivity(),"Item 2 selected", Toast.LENGTH_SHORT).show();
+                Intent a = new Intent(getActivity(), testdrawer.class);
+                startActivity(a);
+                return true;
+            case R.id.item3:
+                Toast.makeText(getActivity(),"Item 3 selected",Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.item4:
+                Toast.makeText(getActivity(),"Item 4 selected",Toast.LENGTH_LONG).show();
+                return true;
+        }
+        return false;
     }
 
     @Override
@@ -278,6 +316,19 @@ public class candidateslistfragment extends Fragment {
                 fbnames.add(cursor.getString(fbnamecolumn));
 
             }while (cursor.moveToNext());
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            String name = data.getStringExtra("newname");
+            String instaname = data.getStringExtra("newinstaname");
+            String fbname = data.getStringExtra("newfbname");
+            Toast.makeText(getActivity(), name + " --- " + instaname, Toast.LENGTH_LONG).show();
+            insertName(name, instaname, fbname);
+            createLists();
         }
     }
 

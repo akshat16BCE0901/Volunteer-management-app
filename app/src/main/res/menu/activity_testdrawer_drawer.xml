@@ -3,26 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/fragment1"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Messenger" />
-        <item
-            android:id="@+id/fragment2"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Add New User" />
-        <item
-            android:id="@+id/fragment3"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Your Profile" />
-        <item
-            android:id="@+id/fragment4"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Credentials" />
-    </group>
 
-    <item android:title="Communicate">
+
+    <item android:title="Digital Assignment 1">
         <menu>
             <group android:checkableBehavior="single">
             <item

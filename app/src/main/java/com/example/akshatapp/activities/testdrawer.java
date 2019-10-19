@@ -66,6 +66,7 @@ public class testdrawer extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.testdrawer, menu);
         return true;
     }
@@ -91,41 +92,7 @@ public class testdrawer extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.fragment1) {
-
-            Fragment fr = new chatfragment();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.framecontainer,fr)
-                    .commit();
-
-        } else if (id == R.id.fragment2) {
-
-            Fragment fr = new adduserfragment();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.framecontainer,fr)
-                    .commit();
-
-        } else if (id == R.id.fragment3) {
-
-            Fragment fr = new detailsfragment();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.framecontainer,fr)
-                    .commit();
-
-
-        } else if (id == R.id.fragment4) {
-
-            Fragment fr = new loginfragment();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.framecontainer,fr)
-                    .commit();
-
-
-        }else if(id==R.id.ques1)
+        if(id==R.id.ques1)
         {
             Intent it = new Intent(testdrawer.this,Welcome.class);
             startActivity(it);
@@ -141,7 +108,7 @@ public class testdrawer extends AppCompatActivity
         }
         else if(id==R.id.ques3)
         {
-            Fragment fr = new chatfragment();
+            Fragment fr = new detailsfragment();
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.framecontainer,fr)
@@ -149,7 +116,7 @@ public class testdrawer extends AppCompatActivity
         }
         else if(id==R.id.ques4)
         {
-            Fragment fr = new chatfragment();
+            Fragment fr = new loginfragment();
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.framecontainer,fr)
