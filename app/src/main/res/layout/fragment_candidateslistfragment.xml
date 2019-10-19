@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Fragments.candidateslistfragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+<androidx.core.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".activities.candidateslist"
+        android:id="@+id/row"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            app:srcCompat="@mipmap/insta" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="**  Swipe right to delete  **"
+            android:textColor="#ff0000"
+            android:textAlignment="center"
+            />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/candidates"
+            android:id="@+id/candidates_list"
+            android:layout_marginTop="50px"
+            >
+        </ListView>
+
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
