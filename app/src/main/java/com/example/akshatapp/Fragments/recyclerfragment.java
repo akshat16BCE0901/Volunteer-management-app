@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.akshatapp.R;
+import com.google.android.material.snackbar.Snackbar;
 
 
 class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.ViewHolder>
@@ -47,7 +47,8 @@ class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.ViewHolde
         holder.cardlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Item clicked "+position, Toast.LENGTH_LONG).show();
+                //Toast.makeText(v.getContext(), "Name : "+names[position]+"\nEmail : "+emails[position], Toast.LENGTH_LONG).show();
+                Snackbar.make(v,"Name : "+names[position]+"\nEmail : "+emails[position],Snackbar.LENGTH_LONG).show();
             }
         });
 
