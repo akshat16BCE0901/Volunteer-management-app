@@ -20,6 +20,7 @@ import com.example.akshatapp.Fragments.candidateslistfragment;
 import com.example.akshatapp.Fragments.chatfragment;
 import com.example.akshatapp.Fragments.detailsfragment;
 import com.example.akshatapp.Fragments.loginfragment;
+import com.example.akshatapp.Fragments.recyclerfragment;
 import com.example.akshatapp.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -35,6 +36,7 @@ public class testdrawer extends AppCompatActivity
         setContentView(R.layout.activity_testdrawer);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("Digital Assignment 1");
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -114,7 +116,7 @@ public class testdrawer extends AppCompatActivity
         }
         else if(id==R.id.ques4)
         {
-            Fragment fr = new loginfragment();
+            Fragment fr = new recyclerfragment();
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.framecontainer,fr)

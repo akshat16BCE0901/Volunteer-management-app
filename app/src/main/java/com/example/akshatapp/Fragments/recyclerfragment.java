@@ -1,49 +1,115 @@
 package com.example.akshatapp.Fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.akshatapp.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link recyclerfragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link recyclerfragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
+class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.ViewHolder>
+{
+    private String[] names,emails;
+    public int[] profile;
+    public MyRecyclerAdapter(String[] names,String[] emails,int[] profile)
+    {
+        this.names = names;
+        this.emails = emails;
+        this.profile = profile;
+    }
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        View rowView = (View) layoutInflater.inflate(R.layout.fragment_detailsfragment,parent,false);
+        ViewHolder vh= new ViewHolder(rowView);
+        return vh;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+        holder.main_name.setText(names[position]);
+        holder.main_email.setText(emails[position]);
+        holder.profile_pic.setImageResource(profile[position]);
+        holder.cardlayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "Item clicked "+position, Toast.LENGTH_LONG).show();
+            }
+        });
+
+//        holder.cardlayout.setOnTouchListener(new OnSwipeTouchListener(a) {
+//            public void onSwipeTop() {
+//                Toast.makeText(a, "top", Toast.LENGTH_SHORT).show();
+//            }
+//            public void onSwipeRight(int posx,int posy) {
+//                Toast.makeText(a, "left to right "+position, Toast.LENGTH_LONG).show();
+//            }
+//            public void onSwipeLeft(int posx,int posy) {
+//                Toast.makeText(a, "right to left "+position, Toast.LENGTH_LONG).show();
+//            }
+//            public void onSwipeBottom() {
+//                Toast.makeText(a, "bottom", Toast.LENGTH_SHORT).show();
+//            }
+//            public void pos(int c,int d)
+//            {
+//                Toast.makeText(a,""+c+" "+d,Toast.LENGTH_LONG).show();
+//            }
+//
+//        });
+
+    }
+    @Override
+    public int getItemCount() {
+        return names.length;
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+
+        public TextView main_name,main_email;
+        public LinearLayout cardlayout;
+        public ImageView profile_pic;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            this.cardlayout = (LinearLayout)itemView.findViewById(R.id.cardlayout);
+            this.main_email = (TextView)itemView.findViewById(R.id.main_email);
+            this.main_name = (TextView)itemView.findViewById(R.id.main_name);
+            this.profile_pic = (ImageView)itemView.findViewById(R.id.profile_pic);
+        }
+    }
+}
+
+
+
 public class recyclerfragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    String[] name = {"Akshat Singhal","Raj Shukla","Himal Kumar Singh","Rakshit Sinha"};
+    String[] email = {"akshat.singhal2016@vitstudent.ac.in","raj.shukla2016@vitstudent.ac.in","himalkumar.singh@vitstudent.ac.in","rakshit.sinha2016@vitstudent.ac.in"};
+    int[] profile = {R.mipmap.profile,R.mipmap.raj,R.mipmap.himal,R.mipmap.rakshit};
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
-
     public recyclerfragment() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment recyclerfragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static recyclerfragment newInstance(String param1, String param2) {
         recyclerfragment fragment = new recyclerfragment();
         Bundle args = new Bundle();
@@ -65,46 +131,13 @@ public class recyclerfragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recyclerfragment, container, false);
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        // Inflate the layout for this fragment;
+        View v = inflater.inflate(R.layout.fragment_recyclerfragment, container, false);
+        RecyclerView recyclerView = (RecyclerView)v.findViewById(R.id.recycler_view);
+        MyRecyclerAdapter adapter = new MyRecyclerAdapter(name,email,profile);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(adapter);
+        return v;
     }
 }
