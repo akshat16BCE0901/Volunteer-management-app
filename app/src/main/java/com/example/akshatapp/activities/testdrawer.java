@@ -26,7 +26,6 @@ import com.google.android.material.navigation.NavigationView;
 public class testdrawer extends AppCompatActivity
         implements chatfragment.OnFragmentInteractionListener,
         adduserfragment.OnadduserFragmentInteractionListener,
-        detailsfragment.OnDetailsFragmentInteractionListener,
         loginfragment.onLoginFragmentInteractionListener,
         NavigationView.OnNavigationItemSelectedListener {
 
@@ -86,10 +85,9 @@ public class testdrawer extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if(id==R.id.ques1)
@@ -135,11 +133,6 @@ public class testdrawer extends AppCompatActivity
 
     @Override
     public void onadduserFragmentInteraction(Uri uri) {
-
-    }
-
-    @Override
-    public void onDetailsFragmentInteraction(Uri uri) {
 
     }
 
