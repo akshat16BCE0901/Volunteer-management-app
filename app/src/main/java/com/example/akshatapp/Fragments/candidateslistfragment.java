@@ -267,10 +267,11 @@ public class candidateslistfragment extends Fragment {
     public void deleteUser(int pos)
     {
         int id = ide.get(pos);
+        String named = names.get(pos);
         String sql = "DELETE from `users` where `id`="+id;
         try {
             db.execSQL(sql);
-            Toast.makeText(getActivity(), "Deleted bhaisahab - "+id, Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Deleting  - "+named, Toast.LENGTH_LONG).show();
 
             Timer t = new Timer();
             t.schedule(new TimerTask() {
