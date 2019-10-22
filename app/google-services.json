@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "226457761410",
+    "firebase_url": "https://akshatapp-3c15d.firebaseio.com",
+    "project_id": "akshatapp-3c15d",
+    "storage_bucket": "akshatapp-3c15d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:226457761410:android:9ab42e7844dd95d8a4e69b",
+        "android_client_info": {
+          "package_name": "com.example.akshatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "226457761410-0hk2gbae7mdqmcgtpl3u72irmevkhqhc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.akshatapp",
+            "certificate_hash": "691f742af9af7ca409e3568d48616aa72ce31e75"
+          }
+        },
+        {
+          "client_id": "226457761410-nn90jmei1te2r820er0covsnkmkrekiv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8sbwNyAzo-MOU5Ntm-fI8Qm2xoK4CWtk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "226457761410-nn90jmei1te2r820er0covsnkmkrekiv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
