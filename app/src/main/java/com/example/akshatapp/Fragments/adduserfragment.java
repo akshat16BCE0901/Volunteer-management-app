@@ -139,8 +139,7 @@ public class adduserfragment extends Fragment {
                 }
                 else
                 {
-                    selectedgender = "male";
-                    //selectedgender = ((RadioButton)v.findViewById(rg.getCheckedRadioButtonId())).getText().toString();
+                    selectedgender = ((RadioButton)getActivity().findViewById(rg.getCheckedRadioButtonId())).getText().toString();
                 }
 
                 ArrayList<String> skills = new ArrayList<>();
@@ -168,18 +167,7 @@ public class adduserfragment extends Fragment {
                 {
                     skills.add("PHP");
                 }
-                String skls = skills.toString();
-//                JSONObject obj = new JSONObject();
                 User obj = new User();
-//                Map<String,Object> obj = new HashMap<String,Object>();
-//                obj.put("name",name.getText().toString().trim());
-//                obj.put("email",email.getText().toString().trim());
-//                obj.put("DOB",dob.getText());
-//                obj.put("phone",phone.getText().toString().trim());
-//                obj.put("address",address1.getText().toString().trim()+" "+address2.getText().toString().trim());
-//                obj.put("website",web.getText().toString());
-//                obj.put("gender",selectedgender);
-
                 String getname = name.getText().toString();
                 String getemail = email.getText().toString();
                 String getphone = phone.getText().toString();
@@ -201,21 +189,12 @@ public class adduserfragment extends Fragment {
                         Toast.makeText(getActivity(), "Inserted into database", Toast.LENGTH_LONG).show();
                     }
                 });
-
-
-
-
-//                Toast.makeText(getActivity(), "Gender : "+selectedgender+ " and skills : "+ skls, Toast.LENGTH_LONG).show();
-//                Intent newint = new Intent(getActivity(), Display.class);
-//                newint.putExtra("data",obj.toString());
-//                getActivity().startActivity(newint);
             }
         });
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(implicitintent.this, "Clicked register", Toast.LENGTH_LONG).show();
                 AlertDialog.Builder alertdialogbuilder = new AlertDialog.Builder(getActivity());
                 alertdialogbuilder.setCancelable(false);
                 alertdialogbuilder.setMessage("Are you sure want to navigate ?");
