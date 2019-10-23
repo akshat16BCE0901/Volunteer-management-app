@@ -16,7 +16,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.akshatapp.Fragments.adduserfragment;
-import com.example.akshatapp.Fragments.candidateslistfragment;
 import com.example.akshatapp.Fragments.chatfragment;
 import com.example.akshatapp.Fragments.detailsfragment;
 import com.example.akshatapp.Fragments.loginfragment;
@@ -100,7 +99,7 @@ public class testdrawer extends AppCompatActivity
         }
         else if(id==R.id.ques2)
         {
-            Fragment fr = new candidateslistfragment();
+            Fragment fr = new adduserfragment();
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.framecontainer,fr)

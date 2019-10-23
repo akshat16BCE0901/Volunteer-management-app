@@ -1,6 +1,5 @@
 package com.example.akshatapp.Fragments;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -24,13 +23,15 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.akshatapp.R;
-import com.example.akshatapp.activities.Display;
+import com.example.akshatapp.activities.User;
 import com.example.akshatapp.activities.candidateslist;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,25 +54,19 @@ public class adduserfragment extends Fragment {
     View v;
     public final int CAMERA_REQUEST = 1000;
     EditText name,email,phone,address1,address2,dob,web;
+    private FirebaseFirestore database = FirebaseFirestore.getInstance();
+    FirebaseDatabase db = FirebaseDatabase.getInstance();
+    DatabaseReference reff= db.getReference();
     Button login,register;
     ImageView iv;
     Button b1,b2,b3;
     Bitmap pic;
-    private OnadduserFragmentInteractionListener mListener;
 
     public adduserfragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment adduserfragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static adduserfragment newInstance(String param1, String param2) {
         adduserfragment fragment = new adduserfragment();
         Bundle args = new Bundle();
@@ -144,7 +139,8 @@ public class adduserfragment extends Fragment {
                 }
                 else
                 {
-                    selectedgender = ((RadioButton)v.findViewById(rg.getCheckedRadioButtonId())).getText().toString();
+                    selectedgender = "male";
+                    //selectedgender = ((RadioButton)v.findViewById(rg.getCheckedRadioButtonId())).getText().toString();
                 }
 
                 ArrayList<String> skills = new ArrayList<>();
@@ -173,27 +169,46 @@ public class adduserfragment extends Fragment {
                     skills.add("PHP");
                 }
                 String skls = skills.toString();
-                JSONObject obj = new JSONObject();
-                try {
-                    obj.put("name",name.getText().toString().trim());
-                    obj.put("email",email.getText().toString().trim());
-                    obj.put("dob",dob.getText());
-                    obj.put("phone",phone.getText().toString().trim());
-                    obj.put("address",address1.getText().toString().trim()+" "+address2.getText().toString().trim());
-                    obj.put("website",web.getText().toString());
-                    obj.put("gender",selectedgender);
-                    obj.put("skills",skls);
-                    obj.put("img",pic);
+//                JSONObject obj = new JSONObject();
+                User obj = new User();
+//                Map<String,Object> obj = new HashMap<String,Object>();
+//                obj.put("name",name.getText().toString().trim());
+//                obj.put("email",email.getText().toString().trim());
+//                obj.put("DOB",dob.getText());
+//                obj.put("phone",phone.getText().toString().trim());
+//                obj.put("address",address1.getText().toString().trim()+" "+address2.getText().toString().trim());
+//                obj.put("website",web.getText().toString());
+//                obj.put("gender",selectedgender);
+
+                String getname = name.getText().toString();
+                String getemail = email.getText().toString();
+                String getphone = phone.getText().toString();
+                String getadd = address1.getText().toString() + " " +address2.getText().toString();
+                String getgender = selectedgender;
+                String getwebsite = web.getText().toString();
+                obj.setName(getname);
+                obj.setAddress(getadd);
+                obj.setEmail(getemail);
+                obj.setPhone(getphone);
+                obj.setWebsite(getwebsite);
+                obj.setGender(getgender);
+                obj.setSkills(skills);
+                String unique_id = getname + new Date().getDate()+ new Date().getTime();
+                reff.child("users").child(unique_id).setValue(obj)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(getActivity(), "Inserted into database", Toast.LENGTH_LONG).show();
+                    }
+                });
 
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+
 
 //                Toast.makeText(getActivity(), "Gender : "+selectedgender+ " and skills : "+ skls, Toast.LENGTH_LONG).show();
-                Intent newint = new Intent(getActivity(), Display.class);
-                newint.putExtra("data",obj.toString());
-                getActivity().startActivity(newint);
+//                Intent newint = new Intent(getActivity(), Display.class);
+//                newint.putExtra("data",obj.toString());
+//                getActivity().startActivity(newint);
             }
         });
 
@@ -240,42 +255,6 @@ public class adduserfragment extends Fragment {
         return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onadduserFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnadduserFragmentInteractionListener) {
-            mListener = (OnadduserFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnadduserFragmentInteractionListener {
 
         void onadduserFragmentInteraction(Uri uri);
